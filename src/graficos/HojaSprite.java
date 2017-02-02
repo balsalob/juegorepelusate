@@ -15,7 +15,7 @@ public class HojaSprite {
 
     //colección de hojas de sprites
 
-    public static HojaSprite desierto = new HojaSprite("/recursos/texturas/desierto.png", 320, 320);
+    public static HojaSprite desierto = new HojaSprite("/texturas/desierto.png", 320, 320);
 
     //fin de la colección
 
