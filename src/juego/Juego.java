@@ -1,6 +1,6 @@
 package juego;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -34,6 +34,7 @@ public class Juego extends Canvas implements Runnable{
 
     private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
     private static int[] pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
+    private static final ImageIcon icono = new ImageIcon(Juego.class.getResource("/icono/icono.png"));
 
     private Juego() {
         setPreferredSize(new Dimension(ANCHO, ALTO));
@@ -46,6 +47,7 @@ public class Juego extends Canvas implements Runnable{
         ventana = new JFrame(NOMBRE);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setResizable(false);
+        ventana.setIconImage(icono.getImage());
         ventana.setLayout(new BorderLayout());
         ventana.add(this, BorderLayout.CENTER);
         ventana.pack();
@@ -85,10 +87,10 @@ public class Juego extends Canvas implements Runnable{
             y--;
         }
         if(teclado.izquierda) {
-            x--;
+            x++;
         }
         if(teclado.derecha) {
-            x++;
+            x--;
         }
         aps++;
     }

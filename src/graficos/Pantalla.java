@@ -1,5 +1,7 @@
 package graficos;
 
+import mapa.cuadro.Cuadro;
+
 /**
  * Created by JoseLuis on 01/02/2017.
  */
@@ -30,6 +32,7 @@ public final class Pantalla {
         }
     }
 
+    //Temporal
     public void mostrar(final int compensacionX, final int compensacionY) {
         for(int y = 0; y < alto; y++) {
             int posicionY = y + compensacionY;
@@ -43,9 +46,33 @@ public final class Pantalla {
                 }
 
                 //temporal
-                pixeles[posicionX + posicionY * ancho] = Sprite.asfalto.pixeles[(x & MASCARA_DEL_SPRITE) +
+                pixeles[posicionX + posicionY * ancho] = Sprite.ASFALTO.pixeles[(x & MASCARA_DEL_SPRITE) +
                         (y & MASCARA_DEL_SPRITE) * LADO_SPRITE];
             }
         }
     }
+    //Fin temporal
+
+    public void mostrarCuadro(int compensacionX, int compensacionY, Cuadro cuadro){
+        for(int y = 0; y < cuadro.sprite.getLado(); y++){
+            int posicionY = y + compensacionY;
+            for (int x = 0; x > cuadro.sprite.getLado(); x++){
+                int posicionX = x + compensacionX;
+                if (posicionX < 0 || posicionX > ancho || posicionY < 0 || posicionY > ancho) {
+                    break;
+                }
+                pixeles[posicionX + posicionY * ancho] = cuadro.sprite.pixeles[x + y * cuadro.sprite.getLado()];
+
+            }
+        }
+    }
+
+    public int getAncho() {
+        return ancho;
+    }
+
+    public int getAlto() {
+        return alto;
+    }
+
 }
