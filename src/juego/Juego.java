@@ -8,6 +8,8 @@ import java.awt.image.DataBufferInt;
 
 import control.Teclado;
 import graficos.Pantalla;
+import mapa.Mapa;
+import mapa.MapaGenerado;
 
 /**
  * Created by Jose Luis on 29/01/2017.
@@ -31,6 +33,7 @@ public class Juego extends Canvas implements Runnable{
     private static Thread thread;
     private static Teclado teclado;
     private static Pantalla pantalla;
+    private static Mapa mapa;
 
     private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
     private static int[] pixeles = ((DataBufferInt) imagen.getRaster().getDataBuffer()).getData();
@@ -40,6 +43,8 @@ public class Juego extends Canvas implements Runnable{
         setPreferredSize(new Dimension(ANCHO, ALTO));
 
         pantalla = new Pantalla(ANCHO, ALTO);
+
+        mapa = new MapaGenerado(128, 128);
 
         teclado = new Teclado();
         addKeyListener(teclado);
@@ -81,16 +86,16 @@ public class Juego extends Canvas implements Runnable{
         teclado.actualizar();
 
         if(teclado.arriba) {
-            y++;
-        }
-        if(teclado.abajo) {
             y--;
         }
+        if(teclado.abajo) {
+            y++;
+        }
         if(teclado.izquierda) {
-            x++;
+            x--;
         }
         if(teclado.derecha) {
-            x--;
+            x++;
         }
         aps++;
     }
@@ -105,7 +110,7 @@ public class Juego extends Canvas implements Runnable{
         }
 
         pantalla.limpiar();
-        pantalla.mostrar(x, y);
+        mapa.mostrar(x, y, pantalla);
 
         System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length);
 

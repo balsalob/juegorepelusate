@@ -10,10 +10,10 @@ public final class Sprite {
     private int y;
 
     public int[] pixeles;
-    private final HojaSprite hoja;
+    private HojaSprite hoja;
 
     //Colección de sprites
-
+    public static final Sprite VACIO = new Sprite(32, 0);
     public static final Sprite ASFALTO = new Sprite(32, 0, 0, HojaSprite.desierto);
 
     //Fin de la colección
@@ -31,6 +31,16 @@ public final class Sprite {
             for (int x = 0; x < lado; x++) {
                 pixeles[y + x * lado] = hoja.pixeles[(x + this.x)+(y+this.y) * hoja.getAncho()];
             }
+        }
+    }
+
+    public Sprite(final int lado, final int color) {
+        this.lado = lado;
+
+        pixeles = new int[lado * lado];
+
+        for (int i = 0; i < pixeles.length; i++) {
+            pixeles[i] = color;
         }
     }
 
